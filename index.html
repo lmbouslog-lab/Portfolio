@@ -8,175 +8,192 @@
 <meta name="description" content="Laura Padgett, Senior Product Manager. 0-to-1 SaaS launches in the creator economy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..700&family=Geist+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap">
 <style>
-/* Layout: a single left-aligned column, with each project laid out as a product one-pager (status, spec fields, outcome) */
+/* Layout: Swiss 12-column grid. Labels hang in columns 1–3, content runs in 4–12. Hairline rules divide sections. No cards; type and space carry the hierarchy. */
+/* Noir & Gold: one deliberate dark look, so there are no light-mode overrides. */
 :root {
-  --bg: #F4F6F5;
-  --surface: #FFFFFF;
-  --fg: #142019;
-  --muted: #56645D;
-  --line: #D6DDD9;
-  --accent: #0B6B64;
-  --accent-soft: #DDEFEC;
-  --live: #1D7A3E;      --live-bg: #E1F2E6;
-  --wip: #8A5A00;       --wip-bg: #FBEFD6;
-  --soon: #5B4B9A;      --soon-bg: #ECE8F7;
-  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0E1512; --surface: #151E1A; --fg: #E5ECE8; --muted: #9AA8A1; --line: #2A3631;
-    --accent: #5CC9BC; --accent-soft: #163330;
-    --live: #6FD394; --live-bg: #16301F; --wip: #F0C068; --wip-bg: #33280F; --soon: #B7A8F0; --soon-bg: #251F3D;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0E1512; --surface: #151E1A; --fg: #E5ECE8; --muted: #9AA8A1; --line: #2A3631;
-  --accent: #5CC9BC; --accent-soft: #163330;
-  --live: #6FD394; --live-bg: #16301F; --wip: #F0C068; --wip-bg: #33280F; --soon: #B7A8F0; --soon-bg: #251F3D;
+  --paper: #0C0C0B;
+  --ink: #EAE5D9;
+  --grey: #948E80;
+  --rule: #2A2824;
+  --accent: #C8A464;
+  --sans: "Host Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --serif: "Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, Consolas, monospace;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   margin: 0;
-  background: var(--bg); color: var(--fg);
-  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 16px; line-height: 1.55; font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
-.wrap {
-  max-width: 1040px; margin: 0 auto;
-  padding-left: max(24px, env(safe-area-inset-left, 0px));
-  padding-right: max(24px, env(safe-area-inset-right, 0px));
-}
-a { color: var(--accent); text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.1; }
-p { margin: 0; }
-.label {
-  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
-}
+::selection { background: var(--accent); color: var(--paper); }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 500; text-wrap: balance; }
+em, .serif { font-family: var(--serif); font-style: italic; font-weight: 500; }
 
-/* Top bar */
-.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 24px; flex-wrap: wrap; }
-.top .mark { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--fg); text-decoration: none; }
-.top nav { display: flex; gap: 20px; flex-wrap: wrap; }
-.top nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
-.top nav a:hover { color: var(--fg); }
+.wrap {
+  max-width: 1320px; margin: 0 auto;
+  padding-left: max(32px, env(safe-area-inset-left, 0px));
+  padding-right: max(32px, env(safe-area-inset-right, 0px));
+}
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
+.lab { grid-column: 1 / span 3; }
+.body { grid-column: 4 / -1; min-width: 0; }
+
+.meta {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--grey);
+}
+.meta.mark::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--accent); margin-right: 10px; vertical-align: 1px; }
+
+/* Masthead */
+.mast { padding-block: 22px; border-bottom: 1px solid var(--ink); align-items: baseline; row-gap: 8px; }
+.mast .who { grid-column: 1 / span 6; font-weight: 500; font-size: 15px; text-decoration: none; }
+.mast nav { grid-column: 7 / -1; display: flex; justify-content: flex-end; gap: 28px; flex-wrap: wrap; }
+.mast nav a { font-size: 15px; text-decoration: none; color: var(--grey); }
+.mast nav a:hover { color: var(--ink); }
 
 /* Hero */
-.hero { padding-block: 56px 72px; display: grid; gap: 28px; }
-.hero h1 { font-size: clamp(44px, 8vw, 88px); font-weight: 700; letter-spacing: -0.02em; }
-.hero h1 .role { display: block; color: var(--accent); font-weight: 500; font-size: .5em; letter-spacing: -0.01em; margin-top: 10px; }
-.hero .bio { font-size: 19px; max-width: 62ch; color: var(--fg); }
-.hero .bio + .bio { color: var(--muted); font-size: 17px; }
-.links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 8px;
-  font: 500 15px var(--body); text-decoration: none; border: 1px solid var(--line); color: var(--fg); background: var(--surface);
-  cursor: pointer;
+.hero { padding-block: 72px 96px; row-gap: 56px; }
+.hero h1 {
+  grid-column: 1 / -1;
+  font-size: clamp(56px, 12.5vw, 184px); line-height: .88; letter-spacing: -0.055em; font-weight: 500;
+  margin-left: -0.05em;
 }
-.btn:hover { border-color: var(--accent); }
-.btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-.btn.primary:hover { filter: brightness(1.08); }
+.hero .lab { display: grid; gap: 6px; align-content: start; padding-top: 10px; }
+.hero .lab p { font-size: 15px; }
+.hero .lab .meta { margin-bottom: 6px; }
+.hero .body { grid-column: 4 / span 8; display: grid; gap: 28px; }
+.lede { font-size: clamp(22px, 2.4vw, 32px); line-height: 1.28; letter-spacing: -0.015em; font-weight: 400; }
+.lede em { font-size: 1.06em; letter-spacing: 0; }
+.sub { font-size: 17px; color: var(--grey); max-width: 58ch; }
+.textlinks { display: flex; flex-wrap: wrap; gap: 12px 32px; font-size: 15px; font-weight: 500; }
+.textlinks a { text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+.textlinks a:hover { color: var(--accent); border-color: var(--accent); }
+.textlinks a::after { content: "↗"; font-weight: 400; margin-left: 6px; }
 
-/* Impact strip */
-.impact { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.impact div { padding: 22px 20px 22px 0; display: grid; gap: 4px; }
-.impact div + div { padding-left: 20px; border-left: 1px solid var(--line); }
-.impact strong { font-family: var(--display); font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
-.impact span { color: var(--muted); font-size: 14px; line-height: 1.4; }
+/* Figures */
+.figures { border-top: 1px solid var(--ink); }
+.fig { grid-column: span 3; padding-block: 22px 8px; display: grid; gap: 14px; align-content: start; }
+.fig strong { font-size: clamp(44px, 5.6vw, 80px); line-height: 1; font-weight: 400; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+.fig strong small { font-size: .42em; letter-spacing: -0.02em; margin-left: 4px; }
+.fig span { font-size: 14px; color: var(--grey); max-width: 22ch; }
 
-/* Sections */
-section.block { padding-block: 88px 0; }
-.sec-head { display: grid; gap: 8px; margin-bottom: 36px; }
-.sec-head h2 { font-size: clamp(30px, 4vw, 40px); font-weight: 700; letter-spacing: -0.01em; }
+/* Section heads */
+section.sec { padding-block: 140px 0; }
+.sec-head { border-top: 1px solid var(--ink); padding-top: 18px; margin-bottom: 72px; row-gap: 16px; }
+.sec-head h2 { font-size: clamp(36px, 4.6vw, 64px); line-height: 1; letter-spacing: -0.04em; }
 
-/* Project one-pagers */
-.projects { display: grid; gap: 28px; }
-.project {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+/* Projects */
+.project { border-top: 1px solid var(--rule); padding-block: 40px 88px; row-gap: 40px; }
+.project .lab { display: grid; gap: 22px; align-content: start; }
+.idx { font-size: 15px; font-family: var(--mono); color: var(--grey); }
+.status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.status.live { color: var(--ink); }
+.status.live::before { background: var(--accent); }
+.status.wip::before { background: transparent; border: 1.5px solid var(--accent); }
+.status.soon { color: var(--grey); }
+.status.soon::before { background: transparent; border: 1.5px solid var(--grey); }
+.pmeta { display: grid; gap: 4px; font-size: 14px; }
+.pmeta .meta { margin-bottom: 2px; }
+.plinks { display: grid; gap: 8px; font-size: 15px; font-weight: 500; }
+.plinks a { text-decoration: none; width: fit-content; border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
+.plinks a:hover { color: var(--accent); border-color: var(--accent); }
+.plinks a::after { content: "↗"; font-weight: 400; margin-left: 6px; }
+
+.project .body { display: grid; gap: 36px; }
+.project h3 { font-size: clamp(48px, 7.4vw, 112px); line-height: .92; letter-spacing: -0.05em; margin-left: -0.04em; }
+.project .summary { font-size: clamp(20px, 1.9vw, 26px); line-height: 1.3; letter-spacing: -0.01em; max-width: 34ch; }
+.quote {
+  font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.18; letter-spacing: -0.01em;
+  max-width: 30ch; padding-left: 28px; border-left: 1px solid var(--accent);
 }
-.p-side { padding: 32px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 18px; }
-.p-side h3 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
-.p-side .summary { font-size: 17px; }
-.p-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.chip { font-family: var(--mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
-.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-.chip.live { color: var(--live); background: var(--live-bg); }
-.chip.wip  { color: var(--wip);  background: var(--wip-bg); }
-.chip.soon { color: var(--soon); background: var(--soon-bg); }
-.role-tag { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-.highlight { margin-top: auto; background: var(--accent-soft); border-radius: 10px; padding: 16px 18px; display: grid; gap: 4px; }
-.highlight .label { color: var(--accent); }
-.highlight p { font-weight: 500; line-height: 1.45; }
-.p-links { display: flex; gap: 18px; flex-wrap: wrap; font-weight: 500; font-size: 15px; }
-.p-links a::after { content: " ↗"; }
-
-.p-spec { padding: 32px; display: grid; gap: 22px; align-content: start; }
-.field { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 16px; }
-.field .label { padding-top: 3px; }
-.field ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
-.stack { display: flex; flex-wrap: wrap; gap: 6px; }
-.stack span { font-family: var(--mono); font-size: 12.5px; border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; color: var(--fg); }
-.pipeline { list-style: none; padding: 0 !important; margin: 0; display: flex !important; flex-wrap: wrap; gap: 6px !important; counter-reset: s; }
-.pipeline li { counter-increment: s; font-size: 14px; border: 1px solid var(--line); border-radius: 6px; padding: 3px 10px 3px 8px; }
-.pipeline li::before { content: counter(s) " "; font-family: var(--mono); color: var(--accent); font-size: 12px; }
+.spec { border-top: 1px solid var(--rule); }
+.row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 7fr); column-gap: 24px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
+.row .meta { padding-top: 4px; }
+.row p, .row ul { font-size: 16px; max-width: 62ch; }
+.row ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.row li { padding-left: 18px; position: relative; }
+.row li::before { content: "—"; position: absolute; left: 0; color: var(--grey); }
+.row b { font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 15px; }
+.steps { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15px; counter-reset: s; }
+.steps span { counter-increment: s; }
+.steps span::before { content: "0" counter(s); font-family: var(--mono); font-size: 11px; color: var(--accent); margin-right: 6px; vertical-align: 2px; }
 
 /* Experience */
-.timeline { display: grid; border-top: 1px solid var(--line); }
-.job { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-bottom: 1px solid var(--line); }
-.job .when { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 4px; font-variant-numeric: tabular-nums; }
-.job h3 { font-family: var(--body); font-size: 18px; font-weight: 600; }
-.job h3 span { color: var(--muted); font-weight: 400; }
-.job p { color: var(--muted); margin-top: 6px; max-width: 70ch; }
+.jobs { border-top: 1px solid var(--rule); }
+.job { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) minmax(0, 4fr); column-gap: 24px; row-gap: 6px; padding-block: 24px; border-bottom: 1px solid var(--rule); }
+.job .when { font-family: var(--mono); font-size: 13px; color: var(--grey); padding-top: 4px; font-variant-numeric: tabular-nums; }
+.job h3 { font-size: 20px; letter-spacing: -0.015em; line-height: 1.25; }
+.job h3 span { display: block; color: var(--grey); font-weight: 400; }
+.job p { color: var(--grey); font-size: 15.5px; }
 
 /* Skills */
-.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; }
-.skills div { display: grid; gap: 10px; align-content: start; }
-.skills h3 { font-family: var(--body); font-size: 16px; font-weight: 600; }
-.skills p { color: var(--muted); }
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 24px; }
+.skills div { display: grid; gap: 12px; align-content: start; border-top: 1px solid var(--rule); padding-top: 16px; }
+.skills p { font-size: 17px; line-height: 1.5; }
 
 /* Contact */
-.contact { margin-block: 96px 0; padding-block: 56px; border-top: 1px solid var(--line); display: grid; gap: 20px; }
-.contact h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: -0.02em; max-width: 18ch; }
-.email-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.email-row code { font-family: var(--mono); font-size: 17px; user-select: all; }
-.status { font-size: 14px; color: var(--muted); min-height: 1.4em; }
-footer { padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
+.contact { padding-block: 160px 48px; }
+.contact .sec-head { margin-bottom: 40px; }
+.contact h2 { font-size: clamp(56px, 11vw, 168px); line-height: .9; letter-spacing: -0.055em; grid-column: 1 / -1; margin-left: -0.05em; }
+.contact h2 em { letter-spacing: -0.03em; }
+.mailrow { row-gap: 20px; padding-top: 48px; align-items: end; }
+.mail { font-size: clamp(22px, 3vw, 40px); letter-spacing: -0.03em; text-decoration: none; border-bottom: 1px solid var(--ink); word-break: break-all; user-select: all; }
+.mail:hover { color: var(--accent); border-color: var(--accent); }
+.actions { display: flex; gap: 12px 28px; flex-wrap: wrap; align-items: center; font-size: 15px; font-weight: 500; margin-top: 24px; }
+.actions button { font: inherit; color: inherit; background: none; border: 0; padding: 0 0 2px; border-bottom: 1px solid var(--ink); cursor: pointer; }
+.actions button:hover { color: var(--accent); border-color: var(--accent); }
+.actions a { text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+.actions a:hover { color: var(--accent); border-color: var(--accent); }
+.status-msg { font-size: 14px; color: var(--grey); min-height: 1.4em; margin-top: 10px; }
 
-@media (max-width: 860px) {
-  .project { grid-template-columns: minmax(0, 1fr); }
-  .p-side { border-right: 0; border-bottom: 1px solid var(--line); }
-  .impact { grid-template-columns: repeat(2, 1fr); }
-  .impact div:nth-child(3) { padding-left: 0; border-left: 0; }
-  .impact div:nth-child(n+3) { border-top: 1px solid var(--line); }
+footer { border-top: 1px solid var(--ink); padding-block: 20px 40px; }
+footer .meta:last-child { grid-column: 7 / -1; text-align: right; }
+footer .meta:first-child { grid-column: 1 / span 6; }
+
+@media (max-width: 900px) {
+  .lab, .body, .hero .body { grid-column: 1 / -1; }
+  .hero .lab { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  .hero .lab .meta { grid-column: 1 / -1; }
+  .fig { grid-column: span 6; border-top: 1px solid var(--rule); }
+  .fig:nth-child(-n+2) { border-top: 0; }
+  .project .lab { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 24px; }
+  .job { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+  .job p { grid-column: 2; }
 }
-@media (max-width: 560px) {
-  .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-  .p-side, .p-spec { padding: 22px; }
-  .field { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .job { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+@media (max-width: 600px) {
+  .wrap { padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+  .hero { padding-block: 48px 64px; row-gap: 36px; }
+  .project .lab { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .project .lab .idx { grid-column: 1 / -1; }
+  .row { grid-template-columns: minmax(0, 1fr); row-gap: 6px; }
+  .job { grid-template-columns: minmax(0, 1fr); }
+  .job p { grid-column: 1; }
   .skills { grid-template-columns: minmax(0, 1fr); }
-  .hero { padding-block: 32px 48px; }
-  section.block { padding-block: 64px 0; }
-  .impact strong { font-size: 28px; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .btn { transition: border-color .15s, filter .15s; }
+  section.sec { padding-block: 96px 0; }
+  .sec-head { margin-bottom: 40px; }
+  .contact { padding-block: 112px 40px; }
+  footer .meta:last-child, footer .meta:first-child { grid-column: 1 / -1; text-align: left; }
+  .mast .who, .mast nav { grid-column: 1 / -1; justify-content: flex-start; }
 }
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <header class="top">
-    <a class="mark" href="#top" id="top">Laura Padgett</a>
+  <header class="mast grid" id="top">
+    <a class="who" href="#top">Laura Padgett</a>
     <nav aria-label="Sections">
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
@@ -184,248 +201,193 @@ footer { padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
     </nav>
   </header>
 
-  <section class="hero">
-    <p class="label">San Diego, CA · Open to remote</p>
-    <h1>Laura Padgett<span class="role">Senior Product Manager</span></h1>
-    <p class="bio">I've spent about 10 years in product and led four 0-to-1 SaaS launches, most of them in the creator economy. I take messy starting points and turn them into products that ship, from two-sided marketplaces to subscription platforms.</p>
-    <p class="bio">I also prototype and validate features myself in Claude Code, so ideas get tested with users before they reach an engineering backlog.</p>
-    <div class="links">
-      <a class="btn primary" href="#work">See my work</a>
-      <a class="btn" href="Laura_Padgett_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-      <a class="btn" href="https://www.linkedin.com/in/laura-m-padgett/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/lmbouslog-lab" target="_blank" rel="noopener">GitHub</a>
+  <section class="hero grid">
+    <h1>Laura<br>Padgett</h1>
+    <div class="lab">
+      <span class="meta mark">Profile</span>
+      <p>Senior Product Manager</p>
+      <p>San Diego, California</p>
+      <p>Open to remote</p>
+    </div>
+    <div class="body">
+      <p class="lede">Ten years in product and four 0-to-1 SaaS launches, mostly in the creator economy. I take messy starting points and <em>turn them into products that ship.</em></p>
+      <p class="sub">My work ranges from two-sided marketplaces to subscription platforms. I also prototype features myself in Claude Code, so ideas are tested with users before they reach an engineering backlog.</p>
+      <div class="textlinks">
+        <a href="Laura_Padgett_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="https://www.linkedin.com/in/laura-m-padgett/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/lmbouslog-lab" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </section>
 
-  <div class="impact" aria-label="Results">
-    <div><strong>4</strong><span>0-to-1 SaaS launches</span></div>
-    <div><strong>9 mo</strong><span>Zero to MVP at FanSpark, as the sole PM</span></div>
-    <div><strong>+80%</strong><span>Onboarding completion at CreatorSpace</span></div>
-    <div><strong>+40%</strong><span>Creator conversion through A/B testing</span></div>
+  <div class="figures grid" aria-label="Results">
+    <div class="fig"><span class="meta">Launches</span><strong>4</strong><span>0-to-1 SaaS products taken to market</span></div>
+    <div class="fig"><span class="meta">FanSpark</span><strong>9<small>mo</small></strong><span>From idea to MVP launch, as the sole PM</span></div>
+    <div class="fig"><span class="meta">CreatorSpace</span><strong>+80<small>%</small></strong><span>Onboarding completion</span></div>
+    <div class="fig"><span class="meta">Taynessa</span><strong>+40<small>%</small></strong><span>Creator conversion through A/B testing</span></div>
   </div>
 
-  <section class="block" id="work">
-    <div class="sec-head">
-      <p class="label">Selected work</p>
-      <h2>Three products, three stages</h2>
+  <section class="sec" id="work">
+    <div class="sec-head grid">
+      <span class="meta mark lab">Selected work · 3</span>
+      <h2 class="body">Three products, <em>three stages.</em></h2>
     </div>
 
-    <div class="projects">
+    <article class="project grid">
+      <div class="lab">
+        <span class="idx">01</span>
+        <div class="pmeta"><span class="meta">Status</span><span class="status live">Live</span></div>
+        <div class="pmeta"><span class="meta">Role</span><span>Founding PM<br>Team of 7 engineers</span></div>
+        <div class="plinks"><a href="https://fanspark.pro" target="_blank" rel="noopener">fanspark.pro</a></div>
+      </div>
+      <div class="body">
+        <h3>FanSpark</h3>
+        <p class="summary">A subscription platform where sports creators earn recurring revenue from their most engaged fans.</p>
+        <p class="quote">From idea to MVP launch on web in nine months, as the sole product manager.</p>
+        <div class="spec">
+          <div class="row"><span class="meta">Problem</span><p>Sports creators had no dedicated way to monetize their most engaged fans.</p></div>
+          <div class="row"><span class="meta">Role</span><p>Founding, hands-on PM. I own the roadmap and lead 3 front-end, 3 back-end and 1 QA engineer. I write the user stories and acceptance criteria, and I make the release decisions. Now building the iOS app and video streaming.</p></div>
+          <div class="row"><span class="meta">Shipped</span><ul>
+            <li>The two-sided marketplace foundation, with tiered creator approval</li>
+            <li>Subscription payments, plus the revenue model: pricing, checkout, renewals and creator payouts</li>
+            <li>Internal integrations connecting Slack, Gmail, GitHub and Figma</li>
+          </ul></div>
+          <div class="row"><span class="meta">Stack</span><div class="tags"><span>Stripe webhooks</span><span>Auth0</span><span>MCP</span><span>Amplitude</span><span>Claude Code</span></div></div>
+        </div>
+      </div>
+    </article>
 
-      <!-- FanSpark -->
-      <article class="project">
-        <div class="p-side">
-          <div class="p-meta">
-            <span class="chip live">Live</span>
-            <span class="role-tag">Founding PM · team of 7 engineers</span>
-          </div>
-          <h3>FanSpark</h3>
-          <p class="summary">A subscription platform where sports creators earn recurring revenue from their most engaged fans.</p>
-          <div class="p-links">
-            <a href="https://fanspark.pro" target="_blank" rel="noopener">Visit site</a>
-          </div>
-          <div class="highlight">
-            <span class="label">Outcome</span>
-            <p>Took the product from zero to an MVP launch on web in 9 months as the sole PM. Now building the iOS app and video streaming.</p>
-          </div>
+    <article class="project grid">
+      <div class="lab">
+        <span class="idx">02</span>
+        <div class="pmeta"><span class="meta">Status</span><span class="status wip">In progress</span></div>
+        <div class="pmeta"><span class="meta">Role</span><span>Solo<br>Design and build</span></div>
+        <div class="plinks">
+          <a href="https://churn-radar-kappa.vercel.app/" target="_blank" rel="noopener">Live app</a>
+          <a href="https://github.com/lmbouslog-lab/churn-radar" target="_blank" rel="noopener">Source code</a>
         </div>
-        <div class="p-spec">
-          <div class="field">
-            <span class="label">Problem</span>
-            <p>Sports creators had no dedicated way to monetize their most engaged fans.</p>
-          </div>
-          <div class="field">
-            <span class="label">My role</span>
-            <p>Founding, hands-on PM. I own the roadmap and lead 3 front-end, 3 back-end and 1 QA engineer. I write the user stories and acceptance criteria, and I make the release decisions.</p>
-          </div>
-          <div class="field">
-            <span class="label">Shipped</span>
-            <ul>
-              <li>The two-sided marketplace foundation, including creator onboarding with tiered approval</li>
-              <li>Subscription payments, plus the revenue model: pricing, checkout, renewals and creator payouts</li>
-              <li>Internal tool integrations connecting Slack, Gmail, GitHub and Figma</li>
-            </ul>
-          </div>
-          <div class="field">
-            <span class="label">Stack</span>
-            <div class="stack"><span>Stripe webhooks</span><span>Auth0</span><span>MCP integrations</span><span>Amplitude</span><span>Claude Code</span></div>
-          </div>
+      </div>
+      <div class="body">
+        <h3>Churn Radar</h3>
+        <p class="summary">A tracker that shows subscription businesses which subscribers are at risk of churning, before they leave.</p>
+        <p class="quote">Built solo from data model to interface. It has 85 passing tests and runs for $0 a month.</p>
+        <div class="spec">
+          <div class="row"><span class="meta">Problem</span><p>Creators and subscription businesses often notice churn only after subscribers have already left.</p></div>
+          <div class="row"><span class="meta">Role</span><p>Solo project. I scoped it, designed it and built it in Claude Code, with the goal of getting it to real users.</p></div>
+          <div class="row"><span class="meta">Decisions</span><ul>
+            <li><b>Privacy first.</b> The subscriber CSV is parsed, scored and charted in the browser and never uploaded.</li>
+            <li>Only hashed IDs, scores and summary metrics are saved, and only when a signed-in creator saves a snapshot.</li>
+            <li>Row-level security keeps each creator's data separate. The app still works in local-only mode.</li>
+          </ul></div>
+          <div class="row"><span class="meta">Stack</span><div class="tags"><span>Next.js 15</span><span>React 19</span><span>TypeScript</span><span>Tailwind</span><span>Supabase</span><span>Recharts</span><span>Vercel</span><span>Vitest</span><span>Playwright</span></div></div>
         </div>
-      </article>
+      </div>
+    </article>
 
-      <!-- Churn Radar -->
-      <article class="project">
-        <div class="p-side">
-          <div class="p-meta">
-            <span class="chip wip">In progress</span>
-            <span class="role-tag">Solo · design and build</span>
-          </div>
-          <h3>Churn Radar</h3>
-          <p class="summary">A tracker that shows subscription businesses which subscribers are at risk of churning, before they leave.</p>
-          <div class="p-links">
-            <a href="https://churn-radar-kappa.vercel.app/" target="_blank" rel="noopener">Try the live app</a>
-            <a href="https://github.com/lmbouslog-lab/churn-radar" target="_blank" rel="noopener">View code</a>
-          </div>
-          <div class="highlight">
-            <span class="label">Outcome</span>
-            <p>Built solo, from data model to UI, as a real product. It has 85 passing unit tests and runs for $0 a month.</p>
-          </div>
+    <article class="project grid">
+      <div class="lab">
+        <span class="idx">03</span>
+        <div class="pmeta"><span class="meta">Status</span><span class="status soon">Coming soon</span></div>
+        <div class="pmeta"><span class="meta">Role</span><span>Solo<br>Content pipeline</span></div>
+        <div class="plinks"><a href="https://www.youtube.com/@bedtimewithlumi" target="_blank" rel="noopener">YouTube</a></div>
+      </div>
+      <div class="body">
+        <h3>Bedtime with Lumi</h3>
+        <p class="summary">A children's bedtime YouTube channel, made with an AI-assisted production pipeline.</p>
+        <p class="quote">COPPA-compliant and Made for Kids from day one, with a locked voice for one consistent character.</p>
+        <div class="spec">
+          <div class="row"><span class="meta">Problem</span><p>Parents of children under 5 need calm, safe wind-down content, and making it consistently takes a lot of time.</p></div>
+          <div class="row"><span class="meta">Role</span><p>Solo project. I designed the production process around a recurring character. A script-writing agent comes next, once the process is proven by hand.</p></div>
+          <div class="row"><span class="meta">Pipeline</span><div class="steps"><span>Script</span><span>Voiceover</span><span>Visuals</span><span>Music</span><span>Editing</span><span>Thumbnail</span></div></div>
+          <div class="row"><span class="meta">Stack</span><div class="tags"><span>ElevenLabs custom voice</span><span>Neolemon</span><span>Leonardo AI</span></div></div>
         </div>
-        <div class="p-spec">
-          <div class="field">
-            <span class="label">Problem</span>
-            <p>Creators and subscription businesses often notice churn only after subscribers have already left.</p>
-          </div>
-          <div class="field">
-            <span class="label">My role</span>
-            <p>Solo project. I scoped it, designed it and built it in Claude Code, with the goal of getting it to real users.</p>
-          </div>
-          <div class="field">
-            <span class="label">Key decisions</span>
-            <ul>
-              <li><strong>Privacy first:</strong> the subscriber CSV is parsed, scored and charted in the browser and never uploaded</li>
-              <li>Only hashed IDs, scores and summary metrics are saved, and only when a signed-in creator saves a snapshot</li>
-              <li>Row-level security keeps each creator's data separate, and the app still works in local-only mode</li>
-            </ul>
-          </div>
-          <div class="field">
-            <span class="label">Stack</span>
-            <div class="stack"><span>Next.js 15</span><span>React 19</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span><span>Recharts</span><span>Vercel</span><span>Vitest</span><span>Playwright</span></div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Bedtime with Lumi -->
-      <article class="project">
-        <div class="p-side">
-          <div class="p-meta">
-            <span class="chip soon">Coming soon</span>
-            <span class="role-tag">Solo · content pipeline</span>
-          </div>
-          <h3>Bedtime with Lumi</h3>
-          <p class="summary">A children's bedtime YouTube channel, made with an AI-assisted production pipeline.</p>
-          <div class="p-links">
-            <a href="https://www.youtube.com/@bedtimewithlumi" target="_blank" rel="noopener">YouTube channel</a>
-          </div>
-          <div class="highlight">
-            <span class="label">Outcome</span>
-            <p>COPPA-compliant and designated Made for Kids from day one, with locked voice settings to keep the character consistent.</p>
-          </div>
-        </div>
-        <div class="p-spec">
-          <div class="field">
-            <span class="label">Problem</span>
-            <p>Parents of children under 5 need calm, safe wind-down content, and making it consistently takes a lot of time.</p>
-          </div>
-          <div class="field">
-            <span class="label">My role</span>
-            <p>Solo project. I designed the production process around a recurring character. A script-writing agent comes next, once the process is proven by hand.</p>
-          </div>
-          <div class="field">
-            <span class="label">Pipeline</span>
-            <ol class="pipeline">
-              <li>Script</li><li>Voiceover</li><li>Visuals</li><li>Music</li><li>Editing</li><li>Thumbnail</li>
-            </ol>
-          </div>
-          <div class="field">
-            <span class="label">Stack</span>
-            <div class="stack"><span>ElevenLabs custom voice</span><span>Neolemon</span><span>Leonardo AI</span></div>
-          </div>
-        </div>
-      </article>
-
-    </div>
+      </div>
+    </article>
   </section>
 
-  <section class="block" id="experience">
-    <div class="sec-head">
-      <p class="label">Experience</p>
-      <h2>Where I've done this before</h2>
+  <section class="sec" id="experience">
+    <div class="sec-head grid">
+      <span class="meta mark lab">Experience</span>
+      <h2 class="body">Where I've <em>done this before.</em></h2>
     </div>
-    <div class="timeline">
-      <div class="job">
-        <span class="when">2024 – Present</span>
-        <div>
-          <h3>Senior Product Manager <span>· FanSpark</span></h3>
+    <div class="grid">
+      <div class="body jobs">
+        <div class="job">
+          <span class="when">2024 — Now</span>
+          <h3>Senior Product Manager<span>FanSpark</span></h3>
           <p>Sole PM taking a creator subscription platform from zero to launch. I own pricing, checkout and payouts on Stripe, and I mentor a Junior PM and a Product Owner.</p>
         </div>
-      </div>
-      <div class="job">
-        <span class="when">2021 – 2023</span>
-        <div>
-          <h3>Product Manager <span>· CreatorSpace</span></h3>
+        <div class="job">
+          <span class="when">2021 — 2023</span>
+          <h3>Product Manager<span>CreatorSpace</span></h3>
           <p>Improved onboarding completion by 80% using funnel data and quick prototypes. Shipped an AI support assistant that cut support tickets by about 80%.</p>
         </div>
-      </div>
-      <div class="job">
-        <span class="when">2015 – 2021</span>
-        <div>
-          <h3>Project/Product Manager <span>· Taynessa, Inc.</span></h3>
+        <div class="job">
+          <span class="when">2015 — 2021</span>
+          <h3>Project/Product Manager<span>Taynessa, Inc.</span></h3>
           <p>Ran 30+ creator campaigns for Amazon, Disney, Google and Sony. Led the launch of an e-learning product with Google, and raised creator conversion by 40% through A/B testing.</p>
         </div>
-      </div>
-      <div class="job">
-        <span class="when">2019 – 2020</span>
-        <div>
-          <h3>Founder <span>· Bbrands!, LLC</span></h3>
+        <div class="job">
+          <span class="when">2019 — 2020</span>
+          <h3>Founder<span>Bbrands!, LLC</span></h3>
           <p>Took a consumer product from market research and design through production, logistics and online launch.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="block" id="skills">
-    <div class="sec-head">
-      <p class="label">Toolkit</p>
-      <h2>What I work with</h2>
+  <section class="sec" id="skills">
+    <div class="sec-head grid">
+      <span class="meta mark lab">Toolkit</span>
+      <h2 class="body">What I <em>work with.</em></h2>
     </div>
-    <div class="skills">
-      <div>
-        <h3>Product</h3>
-        <p>0-to-1 launches, roadmap ownership, user research, two-sided marketplace design, subscription and payments products, leading cross-functional squads</p>
-      </div>
-      <div>
-        <h3>Analytics</h3>
-        <p>Amplitude, Google Analytics, SQL, cohort analysis, A/B testing</p>
-      </div>
-      <div>
-        <h3>Tools and integrations</h3>
-        <p>Stripe (webhooks), Auth0, MCP integrations (Slack, Gmail, GitHub, Figma), Figma, Jira</p>
-      </div>
-      <div>
-        <h3>AI</h3>
-        <p>Claude Code for prototyping and validating features, multi-agent pipelines, AI-assisted content pipelines (ElevenLabs)</p>
+    <div class="grid">
+      <div class="body skills">
+        <div><span class="meta">Product</span><p>0-to-1 launches, roadmap ownership, user research, two-sided marketplace design, subscription and payments products, leading cross-functional squads</p></div>
+        <div><span class="meta">Analytics</span><p>Amplitude, Google Analytics, SQL, cohort analysis, A/B testing</p></div>
+        <div><span class="meta">Tools and integrations</span><p>Stripe webhooks, Auth0, MCP integrations with Slack, Gmail, GitHub and Figma, Figma, Jira</p></div>
+        <div><span class="meta">AI</span><p>Claude Code for prototyping and validating features, multi-agent pipelines, AI-assisted content pipelines with ElevenLabs</p></div>
       </div>
     </div>
   </section>
 
   <section class="contact" id="contact">
-    <p class="label">Contact</p>
-    <h2>Let's talk about what you're building.</h2>
-    <div class="email-row">
-      <code id="email">laura@fanspark.pro</code>
-      <button class="btn" type="button" id="copy-email">Copy email</button>
-      <a class="btn" href="mailto:laura@fanspark.pro">Send email</a>
-      <a class="btn" href="https://www.linkedin.com/in/laura-m-padgett/" target="_blank" rel="noopener">LinkedIn</a>
+    <div class="sec-head grid">
+      <span class="meta mark lab">Contact</span>
     </div>
-    <p class="status" id="copy-status" aria-live="polite"></p>
+    <div class="grid">
+      <h2>Let's talk about what <em>you're building.</em></h2>
+    </div>
+    <div class="mailrow grid">
+      <div class="body">
+        <a class="mail" id="email" href="mailto:laura@fanspark.pro">laura@fanspark.pro</a>
+        <div class="actions">
+          <button type="button" id="copy-email">Copy email</button>
+          <a href="https://www.linkedin.com/in/laura-m-padgett/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="Laura_Padgett_Resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+        </div>
+        <p class="status-msg" id="copy-status" aria-live="polite"></p>
+      </div>
+    </div>
   </section>
 
-  <footer>© <span id="year">2026</span> Laura Padgett · San Diego, CA</footer>
+  <footer class="grid">
+    <span class="meta">© <span id="year">2026</span> Laura Padgett</span>
+    <span class="meta">San Diego, California</span>
+  </footer>
 </div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
   document.getElementById('copy-email').addEventListener('click', function () {
     var status = document.getElementById('copy-status');
-    var text = 'laura@fanspark.pro';
     function fallback() {
       var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
       status.textContent = 'Email selected. Press Ctrl+C or Cmd+C to copy it.';
     }
     try {
-      navigator.clipboard.writeText(text).then(function () { status.textContent = 'Email copied.'; }, fallback);
+      navigator.clipboard.writeText('laura@fanspark.pro').then(function () { status.textContent = 'Email copied.'; }, fallback);
     } catch (e) { fallback(); }
   });
 </script>
