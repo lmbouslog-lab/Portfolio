@@ -126,6 +126,11 @@ section.sec { padding-block: 140px 0; }
 .row li::before { content: "—"; position: absolute; left: 0; color: var(--grey); }
 .row b { font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 15px; }
+.sg { margin: 0; display: grid; gap: 10px; }
+.sg div { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 5fr); column-gap: 16px; }
+.sg dt { font-size: 14px; color: var(--grey); padding-top: 1px; }
+.sg dd { margin: 0; font-size: 15px; }
+@media (max-width: 600px) { .sg div { grid-template-columns: minmax(0, 1fr); row-gap: 2px; } }
 .steps { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15px; counter-reset: s; }
 .steps span { counter-increment: s; }
 .steps span::before { content: "0" counter(s); font-family: var(--mono); font-size: 11px; color: var(--accent); margin-right: 6px; vertical-align: 2px; }
@@ -252,7 +257,16 @@ footer .meta:first-child { grid-column: 1 / span 6; }
             <li>Subscription payments, plus the revenue model: pricing, checkout, renewals and creator payouts</li>
             <li>Internal integrations connecting Slack, Gmail, GitHub and Figma</li>
           </ul></div>
-          <div class="row"><span class="meta">Stack</span><div class="tags"><span>Stripe webhooks</span><span>Auth0</span><span>MCP</span><span>Amplitude</span><span>Claude Code</span></div></div>
+          <div class="row"><span class="meta">Stack</span><dl class="sg">
+            <div><dt>Apps</dt><dd>TypeScript monorepo · NestJS API · Next.js 14 and React 18 for the fan app and admin</dd></div>
+            <div><dt>Data</dt><dd>MongoDB · Redis · BullMQ job queues · Socket.IO for real-time updates</dd></div>
+            <div><dt>Payments</dt><dd>Stripe Connect for creator payouts · subscriptions · webhooks</dd></div>
+            <div><dt>Sign-in</dt><dd>Auth0 with tiered creator approval · Google sign-in</dd></div>
+            <div><dt>Media</dt><dd>AWS S3 uploads · ffmpeg for video · sharp for images</dd></div>
+            <div><dt>Analytics</dt><dd>Amplitude analytics, session replay and experiments · Google Analytics · Sentry</dd></div>
+            <div><dt>Delivery</dt><dd>Docker on AWS ECS · GitHub Actions CI/CD to staging and production</dd></div>
+            <div><dt>Workflow</dt><dd>Claude Code · MCP integrations with Slack, Gmail, GitHub and Figma · Jira · Confluence</dd></div>
+          </dl></div>
         </div>
       </div>
     </article>
