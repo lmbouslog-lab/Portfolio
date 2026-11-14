@@ -117,6 +117,8 @@ section.sec { padding-block: 140px 0; }
   font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.18; letter-spacing: -0.01em;
   max-width: 30ch; padding-left: 28px; border-left: 1px solid var(--accent);
 }
+.demo { margin: 0; }
+.demo video { display: block; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--rule); }
 .spec { border-top: 1px solid var(--rule); }
 .row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 7fr); column-gap: 24px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
 .row .meta { padding-top: 4px; }
@@ -285,6 +287,9 @@ footer .meta:first-child { grid-column: 1 / span 6; }
         <h3>Churn Radar</h3>
         <p class="summary">A tracker that shows subscription businesses which subscribers are at risk of churning, before they leave.</p>
         <p class="quote">Built solo from data model to interface. It has 85 passing tests and runs for $0 a month.</p>
+        <figure class="demo">
+          <video src="churn-radar.mp4" poster="churn-radar.jpg" controls playsinline preload="metadata" aria-label="Churn Radar launch video: upload a subscriber export, see who is at risk, and copy a ready-made message"></video>
+        </figure>
         <div class="spec">
           <div class="row"><span class="meta">Problem</span><p>Creators and subscription businesses often notice churn only after subscribers have already left.</p></div>
           <div class="row"><span class="meta">Role</span><p>Solo project. I scoped it, designed it and built it in Claude Code, with the goal of getting it to real users.</p></div>
