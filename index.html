@@ -131,6 +131,11 @@ section.sec { padding-block: 140px 0; }
 .shot { margin: 0; display: grid; gap: 12px; }
 .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
 .shot img.narrow { max-width: 560px; }
+.shot .zoom { display: block; cursor: zoom-in; }
+.shot .zoom:hover img { border-color: var(--accent); }
+.shot .hint { display: none; }
+@media (max-width: 600px) { .shot .hint { display: inline; color: var(--ink); } }
+.nowrap { white-space: nowrap; }
 .shot figcaption { font-size: 14px; color: var(--grey); max-width: 62ch; }
 .sg { margin: 0; display: grid; gap: 10px; }
 .sg div { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 5fr); column-gap: 16px; }
@@ -315,10 +320,10 @@ footer .meta:first-child { grid-column: 1 / span 6; }
       <div class="body">
         <h3>Bedtime with Lumi</h3>
         <p class="summary">My own AI production studio for a YouTube channel of calm, five-minute bedtime stories for children aged 2 to 6, starring Lumi, a glowing plush star.</p>
-        <p class="quote">A one-paragraph idea becomes a finished episode. Claude does the production work, and nothing moves forward without my sign-off.</p>
+        <p class="quote">A one-paragraph idea becomes a finished episode. Claude does the production work, and nothing moves forward without my <span class="nowrap">sign-off.</span></p>
         <figure class="shot">
-          <img src="images/lumi-board.webp" width="1972" height="792" loading="lazy" alt="The Lumi control center: a board of episodes in columns from Backlog through Scripting, Voice, Visuals, Render, Review, Scheduled and Live.">
-          <figcaption>The Lumi control center. Each episode moves across the board one stage at a time.</figcaption>
+          <a class="zoom" href="images/lumi-board.webp" target="_blank" rel="noopener" aria-label="Open the Lumi control center screenshot at full size"><img src="images/lumi-board.webp" width="1972" height="792" loading="lazy" alt="The Lumi control center: a board of episodes in columns from Backlog through Scripting, Voice, Visuals, Render, Review, Scheduled and Live."></a>
+          <figcaption>The Lumi control center. Each episode moves across the board one stage at a time. <span class="hint">Tap to enlarge.</span></figcaption>
         </figure>
         <div class="spec">
           <div class="row"><span class="meta">Problem</span><p>Parents of young children need calm, safe wind-down videos. Ready-made AI animation tools cost too much for a brand-new channel.</p></div>
@@ -340,7 +345,7 @@ footer .meta:first-child { grid-column: 1 / span 6; }
           </dl></div>
         </div>
         <figure class="shot">
-          <img class="narrow" src="images/lumi-review.webp" width="962" height="952" loading="lazy" alt="An episode's review panel: a finished scene of Lumi the star flying through a night sky, marked Needs your review, with buttons to approve or request changes.">
+          <a class="zoom" href="images/lumi-review.webp" target="_blank" rel="noopener" aria-label="Open the review step screenshot at full size"><img class="narrow" src="images/lumi-review.webp" width="962" height="952" loading="lazy" alt="An episode's review panel: a finished scene of Lumi the star flying through a night sky, marked Needs your review, with buttons to approve or request changes."></a>
           <figcaption>The review step. Claude renders a version, and I approve it or send it back with notes.</figcaption>
         </figure>
       </div>
