@@ -128,6 +128,10 @@ section.sec { padding-block: 140px 0; }
 .row li::before { content: "—"; position: absolute; left: 0; color: var(--grey); }
 .row b { font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 15px; }
+.shot { margin: 0; display: grid; gap: 12px; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+.shot img.narrow { max-width: 560px; }
+.shot figcaption { font-size: 14px; color: var(--grey); max-width: 62ch; }
 .sg { margin: 0; display: grid; gap: 10px; }
 .sg div { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 5fr); column-gap: 16px; }
 .sg dt { font-size: 14px; color: var(--grey); padding-top: 1px; }
@@ -304,20 +308,41 @@ footer .meta:first-child { grid-column: 1 / span 6; }
     <article class="project grid">
       <div class="lab">
         <span class="idx">03</span>
-        <div class="pmeta"><span class="meta">Status</span><span class="status soon">Coming soon</span></div>
-        <div class="pmeta"><span class="meta">Role</span><span>Solo<br>Content pipeline</span></div>
+        <div class="pmeta"><span class="meta">Status</span><span class="status wip">In production</span></div>
+        <div class="pmeta"><span class="meta">Role</span><span>Solo<br>Designed and built</span></div>
         <div class="plinks"><a href="https://www.youtube.com/@bedtimewithlumi" target="_blank" rel="noopener">YouTube</a></div>
       </div>
       <div class="body">
         <h3>Bedtime with Lumi</h3>
-        <p class="summary">A children's bedtime YouTube channel, made with an AI-assisted production pipeline.</p>
-        <p class="quote">COPPA-compliant and Made for Kids from day one, with a locked voice for one consistent character.</p>
+        <p class="summary">My own AI production studio for a YouTube channel of calm, five-minute bedtime stories for children aged 2 to 6, starring Lumi, a glowing plush star.</p>
+        <p class="quote">A one-paragraph idea becomes a finished episode. Claude does the production work, and nothing moves forward without my sign-off.</p>
+        <figure class="shot">
+          <img src="images/lumi-board.webp" width="1972" height="792" loading="lazy" alt="The Lumi control center: a board of episodes in columns from Backlog through Scripting, Voice, Visuals, Render, Review, Scheduled and Live.">
+          <figcaption>The Lumi control center. Each episode moves across the board one stage at a time.</figcaption>
+        </figure>
         <div class="spec">
-          <div class="row"><span class="meta">Problem</span><p>Parents of children under 5 need calm, safe wind-down content, and making it consistently takes a lot of time.</p></div>
-          <div class="row"><span class="meta">Role</span><p>Solo project. I designed the six-stage production process around a recurring character. I am writing the first episodes by hand so Claude can learn the show's voice. After that, Claude will plan the episodes and write the scripts.</p></div>
-          <div class="row"><span class="meta">Pipeline</span><div class="steps"><span>Script</span><span>Voiceover</span><span>Visuals</span><span>Music</span><span>Editing</span><span>Thumbnail</span></div></div>
-          <div class="row"><span class="meta">Stack</span><div class="tags"><span>ElevenLabs custom voice</span><span>Neolemon</span><span>Leonardo AI</span><span>Claude</span><span>Claude Code</span></div></div>
+          <div class="row"><span class="meta">Problem</span><p>Parents of young children need calm, safe wind-down videos. Ready-made AI animation tools cost too much for a brand-new channel.</p></div>
+          <div class="row"><span class="meta">Role</span><p>Solo project. I designed and built it with Claude Code. It runs on my Mac and is built for one user: me, as editor and final approver.</p></div>
+          <div class="row"><span class="meta">How it works</span><div class="steps"><span>Idea</span><span>Script</span><span>Narration</span><span>Pictures</span><span>Video</span><span>YouTube copy</span><span>Publish</span></div></div>
+          <div class="row"><span class="meta">Decisions</span><ul>
+            <li><b>Build instead of buy.</b> I used open-source tools and AI I already pay for, so an episode costs almost nothing extra.</li>
+            <li><b>A human approves every stage.</b> Each step runs on its own, then waits for my approval or a change request. The AI can't approve its own work, and my edits are never overwritten.</li>
+            <li><b>A trade-off I accepted.</b> The free voice can't sound sleepy on cue, so I control pacing and pauses instead, and I compare samples before building any fix.</li>
+          </ul></div>
+          <div class="row"><span class="meta">Stack</span><dl class="sg">
+            <div><dt>App</dt><dd>Python · FastAPI · SQLite · plain JavaScript</dd></div>
+            <div><dt>AI</dt><dd>Claude · Claude Code, run by the app with tightly limited tools</dd></div>
+            <div><dt>Voice</dt><dd>Kokoro-82M, an open-source voice that runs on my Mac</dd></div>
+            <div><dt>Pictures</dt><dd>Canva AI image generation in a house style</dd></div>
+            <div><dt>Video</dt><dd>FFmpeg · Pillow · NumPy</dd></div>
+            <div><dt>Publishing</dt><dd>YouTube Data API</dd></div>
+            <div><dt>Quality</dt><dd>285 automated checks, plus 61 deliberate rule breaks the tests must catch</dd></div>
+          </dl></div>
         </div>
+        <figure class="shot">
+          <img class="narrow" src="images/lumi-review.webp" width="962" height="952" loading="lazy" alt="An episode's review panel: a finished scene of Lumi the star flying through a night sky, marked Needs your review, with buttons to approve or request changes.">
+          <figcaption>The review step. Claude renders a version, and I approve it or send it back with notes.</figcaption>
+        </figure>
       </div>
     </article>
   </section>
@@ -363,7 +388,7 @@ footer .meta:first-child { grid-column: 1 / span 6; }
         <div><span class="meta">Product</span><p>0-to-1 launches, roadmap ownership, user research, two-sided marketplace design, subscription and payments products, leading cross-functional squads</p></div>
         <div><span class="meta">Analytics</span><p>Amplitude, Google Analytics, SQL, cohort analysis, A/B testing</p></div>
         <div><span class="meta">Tools and integrations</span><p>Stripe webhooks, Auth0, MCP integrations with Slack, Gmail, GitHub and Figma, Figma, Jira</p></div>
-        <div><span class="meta">AI</span><p>Claude Code for prototyping and validating features, multi-agent pipelines, AI-assisted content pipelines with ElevenLabs</p></div>
+        <div><span class="meta">AI</span><p>Claude Code for prototyping and validating features, multi-agent pipelines, an AI video production pipeline with human approval at every stage</p></div>
       </div>
     </div>
   </section>
